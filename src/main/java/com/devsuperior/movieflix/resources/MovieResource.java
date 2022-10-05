@@ -26,12 +26,12 @@ public class MovieResource {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
 	}
 	
-	@GetMapping
+	@GetMapping("/genres")
 	public ResponseEntity<Page<MovieDTO>> findByGenreId(@RequestParam Long genreId, Pageable pageable){
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByGenre(genreId, pageable));
 	}
 	
-	@GetMapping("/pageable")
+	@GetMapping
 	public ResponseEntity<Page<MovieDTO>> findAll(Pageable pageable){
 		return ResponseEntity.status(HttpStatus.OK).body(service.findAll(pageable));
 	}

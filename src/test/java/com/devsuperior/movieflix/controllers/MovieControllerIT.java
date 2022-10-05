@@ -74,8 +74,9 @@ public class MovieControllerIT {
 		result.andExpect(jsonPath("$.year").isNotEmpty());
 		result.andExpect(jsonPath("$.imgUrl").isNotEmpty());
 		result.andExpect(jsonPath("$.synopsis").isNotEmpty());
-		result.andExpect(jsonPath("$.genreId").isNotEmpty());
-		result.andExpect(jsonPath("$.genreName").isNotEmpty());
+		result.andExpect(jsonPath("$.genre").isNotEmpty());
+		result.andExpect(jsonPath("$.genre.id").isNotEmpty());
+		result.andExpect(jsonPath("$.genre.name").isNotEmpty());
 	}
 
 	@Test
@@ -95,8 +96,9 @@ public class MovieControllerIT {
 		result.andExpect(jsonPath("$.year").isNotEmpty());
 		result.andExpect(jsonPath("$.imgUrl").isNotEmpty());
 		result.andExpect(jsonPath("$.synopsis").isNotEmpty());
-		result.andExpect(jsonPath("$.genreId").isNotEmpty());
-		result.andExpect(jsonPath("$.genreName").isNotEmpty());
+		result.andExpect(jsonPath("$.genre").isNotEmpty());
+		result.andExpect(jsonPath("$.genre.id").isNotEmpty());
+		result.andExpect(jsonPath("$.genre.name").isNotEmpty());
 	}
 
 	@Test
@@ -128,7 +130,7 @@ public class MovieControllerIT {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, visitorUsername, visitorPassword);
 
 		ResultActions result =
-				mockMvc.perform(get("/movies/pageable")
+				mockMvc.perform(get("/movies")
 					.header("Authorization", "Bearer " + accessToken)
 					.contentType(MediaType.APPLICATION_JSON));
 
@@ -152,7 +154,7 @@ public class MovieControllerIT {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
 		
 		ResultActions result =
-				mockMvc.perform(get("/movies/pageable")
+				mockMvc.perform(get("/movies")
 					.header("Authorization", "Bearer " + accessToken)
 					.contentType(MediaType.APPLICATION_JSON));
 
@@ -178,7 +180,7 @@ public class MovieControllerIT {
 		long genreId = 1L;
 		
 		ResultActions result =
-				mockMvc.perform(get("/movies?genreId=" + genreId)
+				mockMvc.perform(get("/movies/genres?genreId=" + genreId)
 					.header("Authorization", "Bearer " + accessToken)
 					.contentType(MediaType.APPLICATION_JSON));
 
